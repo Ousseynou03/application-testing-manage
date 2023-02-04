@@ -15,6 +15,7 @@ public class ScenarioDeTest {
     @Column(length = 300)
     private String scenario;
 
-    @ManyToOne
+   @ManyToOne
+    @JoinColumn(name = "CasTest_id")
     private CasDeTest casDeTest;
 }

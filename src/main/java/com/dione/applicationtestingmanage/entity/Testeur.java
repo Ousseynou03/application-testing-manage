@@ -1,6 +1,7 @@
 package com.dione.applicationtestingmanage.entity;
 
 
+import com.dione.applicationtestingmanage.enums.Nom;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,18 +13,27 @@ import java.util.Collection;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class Testeur {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTesteur;
-    private String nom;
-    private String prenom;
+    @Id
+    private String idTesteur;
+    private Nom nom;
 
     @OneToMany(mappedBy = "testeur")
     private Collection<Ticket> tickets;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "testeurs")
     private Collection<Release> releases;
 
-    @ManyToMany
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(
+            //name = "cas_De_Test_testeur",
+            joinColumns = @JoinColumn(name = "idTesteur"),
+            inverseJoinColumns = @JoinColumn(name = "refCasTest")
+    )
     private Collection<CasDeTest> casDeTests;
 
 }

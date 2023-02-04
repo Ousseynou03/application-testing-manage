@@ -16,19 +16,21 @@ public class Ticket {
     private String titre;
     private Types type;
     @ManyToOne
+    @JoinColumn(name = "ref_Release_id")
     private Release release;
 
     @ManyToOne
+    @JoinColumn(name = "id_Testeur")
     private Testeur testeur;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ref_Anomalie_id")
     private Anomalie anomalie;
 
     @ManyToOne
+    @JoinColumn(name = "refCasTest_id")
     private CasDeTest casDeTest;
 
-    @ManyToOne
-    private Anomalie anom;
 }
 
 

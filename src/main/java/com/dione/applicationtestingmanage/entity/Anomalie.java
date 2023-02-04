@@ -33,6 +33,7 @@ public class Anomalie {
     private Cloturee cloturee;
 
     @OneToMany
+    @JoinColumn(name = "ref_Ticket_id")
     private Collection<Ticket> tickets;
 
 

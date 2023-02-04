@@ -18,16 +18,15 @@ public class CasDeTest {
     @Enumerated(EnumType.STRING)
     @Column(length = 15)
     private Resultat resultat;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
+
+   @OneToMany
+    @JoinColumn(name = "ref_Scenario_id")
     private Collection<ScenarioDeTest> scenarioDeTests;
 
-    @OneToMany(mappedBy = "casDeTest")
+    @OneToMany
+    @JoinColumn(name = "ref_Ticket_id")
     private Collection<Ticket> tickets;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "casDeTests")
     private Collection<Testeur> testeur;
 }

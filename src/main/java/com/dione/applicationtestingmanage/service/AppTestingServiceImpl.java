@@ -166,7 +166,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
     @Override
     public void initCasDeTest() {
         //ticketRepository.findAll().forEach(ticket -> {
-        //testeurRepository.findAll().forEach(teste -> {
+        testeurRepository.findAll().forEach(teste -> {
         CasDeTest  casDeTest = new CasDeTest();
         casDeTest.setRefCasTest(UUID.randomUUID().toString());
         double randomNumber5 = Math.random();
@@ -188,7 +188,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
         casDeTest.setTesteur(casDeTest.getTesteur());
         casDeTestRepository.save(casDeTest);
         // });
-        //  });
+         });
 
 
     }

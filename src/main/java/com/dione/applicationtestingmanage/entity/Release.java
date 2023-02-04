@@ -28,11 +28,9 @@ public class Release {
     /*Cela signifie que si toute fois une release est supprimée,
     le ticket deviendra ophelin et sera détruit sur le coup
      */
-    @OneToMany(mappedBy = "release",
-    cascade = CascadeType.ALL,
-    orphanRemoval = true,
-    fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "release")
     private Collection<Ticket> tickets;
+
 
     @ManyToMany(
             fetch = FetchType.LAZY,

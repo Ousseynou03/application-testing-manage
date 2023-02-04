@@ -31,30 +31,35 @@ public class AppTestingServiceImpl implements IAppTestingService{
         this.anomalieRepository = anomalieRepository;
     }
 
+    //Initialisation des données de releases
     @Override
     public void initRelease() {
-        Release release = new Release();
-        release.setRefRelease(UUID.randomUUID().toString());
-        release.setDateLivraison(new Date());
-        release.setDatePrevision(new Date());
-        release.setDateReelle(new Date());
-        releaseRepository.save(release);
+        for (int i=0; i<10;i++){
+            Release release = new Release();
+            release.setRefRelease(UUID.randomUUID().toString());
+            release.setDateLivraison(new Date());
+            release.setDatePrevision(new Date());
+            release.setDateReelle(new Date());
+            releaseRepository.save(release);
+        }
+
     }
 
     //Initialisation des données de Ticket
     @Override
     public void initTicket() {
-        releaseRepository.findAll().forEach(release -> {
-           testeurRepository.findAll().forEach(testeur -> {
-               Stream.of("Déclaration des salaires","Controle de validite").forEach(titreTicket -> {
+       releaseRepository.findAll().forEach(release -> {
+           //testeurRepository.findAll().forEach(testeur -> {
+               Stream.of("Déclaration des salaires","Controle de validite","Affilié ajouté sur un mois M").forEach(titreTicket -> {
                    Ticket ticket = new Ticket();
                    ticket.setRefTicket(UUID.randomUUID().toString());
                    ticket.setTitre(titreTicket);
                    ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
+                   ticket.setTesteur(ticket.getTesteur());
                    ticketRepository.save(ticket);
                });
-           });
-        });
+          });
+       // });
 
     }
 
@@ -62,10 +67,10 @@ public class AppTestingServiceImpl implements IAppTestingService{
     //Initialisation des données des anomalies
     @Override
     public void initAnomalie() {
-        releaseRepository.findAll().forEach(rel -> {
-            rel.getTesteurs().forEach(test -> {
-                test.getCasDeTests().forEach(cas -> {
-                    cas.getTickets().forEach(tick -> {
+        //releaseRepository.findAll().forEach(rel -> {
+          //  rel.getTesteurs().forEach(test -> {
+               // test.getCasDeTests().forEach(cas -> {
+                    //ticketRepository.findAll().forEach(tick -> {
                 Anomalie anomalie = new Anomalie();
                 anomalie.setRefAnomalie(UUID.randomUUID().toString());
                 double randomNumber = Math.random();
@@ -111,31 +116,37 @@ public class AppTestingServiceImpl implements IAppTestingService{
                     cloturee = Cloturee.ValidationCorrectifs;
                 }
                 anomalie.setCloturee(cloturee);
+                anomalie.setTickets(anomalie.getTickets());
                 anomalieRepository.save(anomalie);
-            });
-        });
-        });
-        });
+          // });
+     //  });
+            //});
+       //});
 
     }
+
+    //Initialisation des données de Scenario de test
 
     @Override
     public void initScenarioDeTest() {
-        releaseRepository.findAll().forEach(re -> {
-            re.getTesteurs().forEach(t -> {
-                t.getCasDeTests().forEach(casTest -> {
+    // releaseRepository.findAll().forEach(re -> {
+         //re.getTesteurs().forEach(t -> {
+               // casDeTestRepository.findAll().forEach(casTest -> {
                     Stream.of("Scenario", "ScenarioTest1", "ScenarioTest2").forEach(nomScenario -> {
                         ScenarioDeTest scenarioDeTest = new ScenarioDeTest();
                         scenarioDeTest.setRefScenario(UUID.randomUUID().toString());
+                        scenarioDeTest.setScenario(nomScenario);
+                        scenarioDeTest.setCasDeTest(scenarioDeTest.getCasDeTest());
                         scenarioDeTestRepository.save(scenarioDeTest);
                     });
-                });
-            });
-        });
+               // });
+           // });
+      //  });
 
 
     }
 
+    //Initialisation des données de Testeur
     @Override
     public void initTesteur() {
         releaseRepository.findAll().forEach(release -> {
@@ -143,17 +154,21 @@ public class AppTestingServiceImpl implements IAppTestingService{
                 Testeur testeur = new Testeur();
                 testeur.setNom(nomTesteur);
                 testeur.setPrenom(testeur.getPrenom());
+                testeur.setReleases(testeur.getReleases());
+                testeur.setCasDeTests(testeur.getCasDeTests());
                 testeurRepository.save(testeur);
             });
         });
 
     }
 
+    //Initialisation des données de Cas de test
     @Override
     public void initCasDeTest() {
-        releaseRepository.findAll().forEach(rels -> {
-            rels.getTesteurs().forEach(teste -> {
+        //ticketRepository.findAll().forEach(ticket -> {
+          //testeurRepository.findAll().forEach(teste -> {
                 CasDeTest  casDeTest = new CasDeTest();
+                casDeTest.setRefCasTest(UUID.randomUUID().toString());
                 double randomNumber5 = Math.random();
                 Resultat resultat;
 
@@ -170,9 +185,10 @@ public class AppTestingServiceImpl implements IAppTestingService{
                 }
 
                 casDeTest.setResultat(resultat);
+                casDeTest.setTesteur(casDeTest.getTesteur());
                 casDeTestRepository.save(casDeTest);
-            });
-        });
+           // });
+      //  });
 
 
     }

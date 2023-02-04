@@ -15,6 +15,6 @@ public class ScenarioDeTest {
     @Column(length = 300)
     private String scenario;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private CasDeTest casDeTest;
 }

@@ -18,8 +18,6 @@ public class CasDeTest {
     @Enumerated(EnumType.STRING)
     @Column(length = 15)
     private Resultat resultat;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Ticket ticket;
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
@@ -30,6 +28,6 @@ public class CasDeTest {
     @OneToMany(mappedBy = "casDeTest")
     private Collection<Ticket> tickets;
 
-    @ManyToOne
-    private Testeur testeur;
+    @ManyToMany
+    private Collection<Testeur> testeur;
 }

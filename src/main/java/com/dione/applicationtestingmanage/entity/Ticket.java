@@ -7,8 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
@@ -17,19 +15,20 @@ public class Ticket {
     private String refTicket;
     private String titre;
     private Types type;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Release release;
 
     @ManyToOne
     private Testeur testeur;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER)
+    @OneToOne
     private Anomalie anomalie;
 
     @ManyToOne
     private CasDeTest casDeTest;
+
+    @ManyToOne
+    private Anomalie anom;
 }
 
 

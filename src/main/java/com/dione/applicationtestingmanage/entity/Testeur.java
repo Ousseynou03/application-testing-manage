@@ -23,7 +23,7 @@ public class Testeur {
     @ManyToMany
     private Collection<Release> releases;
 
-    @OneToMany(mappedBy = "testeur")
+    @ManyToMany
     private Collection<CasDeTest> casDeTests;
 
 }

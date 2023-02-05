@@ -2,6 +2,9 @@ package com.dione.applicationtestingmanage.entity;
 
 import com.dione.applicationtestingmanage.enums.Types;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +21,7 @@ public class Ticket {
     private Types type;
     @ManyToOne
     //@JoinColumn(name = "ref_Release_id")
-   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JsonBackReference
+    @JsonManagedReference
     private Release release;
 
     @ManyToOne

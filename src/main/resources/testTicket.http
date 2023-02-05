@@ -3,18 +3,14 @@ Accept: application/json
 Content-Type: application/json
 
 
+
 {
 
-  "titre": "Déclaration des salaires",
-  "type": "ANOMALIE",
+  "titre": "Tests",
   "anomalie": {
-    "criticite": "MAJEURE",
-    "statut": "FERME",
-    "enCours": "Verification",
-    "cloturee": "ValidationCorrectifs"
+    "refAnomalie": "33254f69-c8ad-4f19-abfb-57fb0d508b36"
   },
   "casDeTest": {
-
-    "resultat": "OK"
+    "refCasTest": "ac9a2cc6-4d8b-4bc0-91da-f5a7fd6082c0"
   }
-  }
+}

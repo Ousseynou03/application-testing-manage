@@ -60,7 +60,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
                                 ticket.setRefTicket(UUID.randomUUID().toString());
                                 ticket.setTitre(titreTicket);
                                 ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
-                                ticket.setTesteur(ticket.getTesteur());
+                                //ticket.setTesteur(ticket.getTesteur());
                                 ticket.setRelease(release);
                                 ticket.setAnomalie(anomalie);
                                 ticket.setCasDeTest(cas);
@@ -127,8 +127,8 @@ public class AppTestingServiceImpl implements IAppTestingService{
             cloturee = Cloturee.ValidationCorrectifs;
         }
         anomalie.setCloturee(cloturee);
-        anomalie.setTickets(anomalie.getTickets());
         anomalieRepository.save(anomalie);
+
 
     }
 

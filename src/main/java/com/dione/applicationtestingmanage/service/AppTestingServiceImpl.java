@@ -20,13 +20,15 @@ public class AppTestingServiceImpl implements IAppTestingService{
     private final ScenarioDeTestRepository scenarioDeTestRepository;
     private final CasDeTestRepository casDeTestRepository;
     private final AnomalieRepository anomalieRepository;
+    private final TesteurRepository testeurRepository;
 
-    public AppTestingServiceImpl(ReleaseRepository releaseRepository, TicketRepository ticketRepository, ScenarioDeTestRepository scenarioDeTestRepository, CasDeTestRepository casDeTestRepository, AnomalieRepository anomalieRepository) {
+    public AppTestingServiceImpl(ReleaseRepository releaseRepository, TicketRepository ticketRepository, ScenarioDeTestRepository scenarioDeTestRepository, CasDeTestRepository casDeTestRepository, AnomalieRepository anomalieRepository, TesteurRepository testeurRepository) {
         this.releaseRepository = releaseRepository;
         this.ticketRepository = ticketRepository;
         this.scenarioDeTestRepository = scenarioDeTestRepository;
         this.casDeTestRepository = casDeTestRepository;
         this.anomalieRepository = anomalieRepository;
+        this.testeurRepository = testeurRepository;
     }
 
     //Initialisation des données de releases
@@ -47,24 +49,29 @@ public class AppTestingServiceImpl implements IAppTestingService{
     @Override
     public void initTicket() {
         releaseRepository.findAll().forEach(release -> {
+
             casDeTestRepository.findAll().forEach(cas-> {
+
                 anomalieRepository.findAll().forEach(anomalie -> {
 
-                    Stream.of("Déclaration des salaires","Controle de validite","Affilié ajouté sur un mois M").forEach(titreTicket -> {
-                        Ticket ticket = new Ticket();
-                        ticket.setRefTicket(UUID.randomUUID().toString());
-                        ticket.setTitre(titreTicket);
-                        ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
-                        ticket.setTesteur(Math.random() > 0.5 ? Testeur.ANDRES : Testeur.RICHARD);
-                        ticket.setRelease(release);
-                        ticket.setAnomalie(anomalie);
-                        ticket.setCasDeTest(cas);
-                        ticketRepository.save(ticket);
-            });
+                        Stream.of("Déclaration des salaires","Controle de validite","Affilié ajouté sur un mois M").forEach(titreTicket -> {
+
+                                Ticket ticket = new Ticket();
+                                ticket.setRefTicket(UUID.randomUUID().toString());
+                                ticket.setTitre(titreTicket);
+                                ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
+                                ticket.setTesteur(ticket.getTesteur());
+                                ticket.setRelease(release);
+                                ticket.setAnomalie(anomalie);
+                                ticket.setCasDeTest(cas);
+                                ticketRepository.save(ticket);
+                            });
+
+
+                    });
+
 
                                 });
-
-            });
        });
 
 
@@ -74,10 +81,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
     //Initialisation des données des anomalies
     @Override
     public void initAnomalie() {
-        //releaseRepository.findAll().forEach(rel -> {
-        //  rel.getTesteurs().forEach(test -> {
-        // test.getCasDeTests().forEach(cas -> {
-        //ticketRepository.findAll().forEach(tick -> {
+
         Anomalie anomalie = new Anomalie();
         anomalie.setRefAnomalie(UUID.randomUUID().toString());
         double randomNumber = Math.random();
@@ -125,10 +129,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
         anomalie.setCloturee(cloturee);
         anomalie.setTickets(anomalie.getTickets());
         anomalieRepository.save(anomalie);
-        // });
-        //  });
-        //});
-        //});
 
     }
 
@@ -136,41 +136,34 @@ public class AppTestingServiceImpl implements IAppTestingService{
 
     @Override
     public void initScenarioDeTest() {
-        // releaseRepository.findAll().forEach(re -> {
-        //re.getTesteurs().forEach(t -> {
-        // casDeTestRepository.findAll().forEach(casTest -> {
+
+        casDeTestRepository.findAll().forEach(casTest -> {
         Stream.of("Scenario", "ScenarioTest1", "ScenarioTest2").forEach(nomScenario -> {
             ScenarioDeTest scenarioDeTest = new ScenarioDeTest();
             scenarioDeTest.setRefScenario(UUID.randomUUID().toString());
             scenarioDeTest.setScenario(nomScenario);
-            scenarioDeTest.setCasDeTest(scenarioDeTest.getCasDeTest());
+            scenarioDeTest.setCasDeTest(casTest);
             scenarioDeTestRepository.save(scenarioDeTest);
         });
-        // });
-        // });
-        //  });
+        });
+
 
 
     }
 
-/*
+
     //Initialisation des données de Testeur
     @Override
     public void initTesteur() {
-        releaseRepository.findAll().forEach(release -> {
+
                 Stream.of("Andres","Richard").forEach(nomTesteur-> {
                     Testeur testeur = new Testeur();
                     testeur.setNom(nomTesteur);
-                    //testeur.set
-                    testeur.setCasDeTests(testeur.getCasDeTests());
                     testeurRepository.save(testeur);
                 });
-            });
-
-
 
     }
-*/
+
 
     //Initialisation des données de Cas de test
     @Override
@@ -181,7 +174,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
         casDeTest.setRefCasTest(UUID.randomUUID().toString());
         double randomNumber5 = Math.random();
         Resultat resultat;
-
         if (randomNumber5 < 0.2) {
             resultat = Resultat.OK;
         } else if (randomNumber5 < 0.4) {
@@ -193,7 +185,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
         } else {
             resultat = Resultat.HorsPerimetre;
         }
-
         casDeTest.setResultat(resultat);
         casDeTestRepository.save(casDeTest);
         // });
@@ -201,4 +192,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
 
 
     }
+
+
 }

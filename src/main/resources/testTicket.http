@@ -1,0 +1,20 @@
+POST http://localhost:9091/addTicket
+Accept: application/json
+Content-Type: application/json
+
+
+{
+
+  "titre": "Déclaration des salaires",
+  "type": "ANOMALIE",
+  "anomalie": {
+    "criticite": "MAJEURE",
+    "statut": "FERME",
+    "enCours": "Verification",
+    "cloturee": "ValidationCorrectifs"
+  },
+  "casDeTest": {
+
+    "resultat": "OK"
+  }
+  }

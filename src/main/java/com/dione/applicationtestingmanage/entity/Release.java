@@ -1,5 +1,6 @@
 package com.dione.applicationtestingmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,7 @@ public class Release {
 /*            cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER */)
+    @JsonManagedReference
     private Collection<Ticket> tickets;
 
 }

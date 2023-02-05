@@ -16,6 +16,6 @@ public class ScenarioDeTest {
     private String scenario;
 
    @ManyToOne
-    @JoinColumn(name = "CasTest_id")
+    //@JoinColumn(name = "CasTest_id")
     private CasDeTest casDeTest;
 }

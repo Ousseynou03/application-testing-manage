@@ -20,11 +20,11 @@ public class CasDeTest {
     private Resultat resultat;
 
     @OneToMany
-    @JoinColumn(name = "ref_Scenario_id")
+    //@JoinColumn(name = "ref_Scenario_id")
     private Collection<ScenarioDeTest> scenarioDeTests;
 
     @OneToMany
-    @JoinColumn(name = "ref_Ticket_id")
+    //@JoinColumn(name = "ref_Ticket_id")
     private Collection<Ticket> tickets;
 
 

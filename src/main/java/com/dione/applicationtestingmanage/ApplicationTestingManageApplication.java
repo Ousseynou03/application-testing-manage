@@ -34,12 +34,14 @@ public class ApplicationTestingManageApplication implements CommandLineRunner {
 		restConfiguration.exposeIdsFor(Anomalie.class);
 		restConfiguration.exposeIdsFor(CasDeTest.class);
 		restConfiguration.exposeIdsFor(ScenarioDeTest.class);
+		restConfiguration.exposeIdsFor(Testeur.class);
 
 		appTestingService.initAnomalie();
 		appTestingService.initCasDeTest();
 		appTestingService.initScenarioDeTest();
 		appTestingService.initRelease();
 		appTestingService.initTicket();
+		appTestingService.initTesteur();
 
 	}
 }

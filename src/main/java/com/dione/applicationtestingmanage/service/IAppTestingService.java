@@ -7,4 +7,5 @@ public interface IAppTestingService {
     public void initAnomalie();
     public void initScenarioDeTest();
     public void initCasDeTest();
+    public void initTesteur();
 }

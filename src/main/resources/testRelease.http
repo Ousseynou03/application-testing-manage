@@ -1,0 +1,26 @@
+POST http://localhost:9091/addRelease
+Accept: application/json
+Content-Type: application/json
+
+{
+  "dateLivraison": "2023-02-12",
+  "datePrevision": "2023-02-12",
+  "dateReelle": "2023-02-15",
+  "ticket" : {
+    "titre": "Déclaration des salaires",
+    "type": "EVOLUTION",
+    "testeur": "Richard",
+    "anomalie": {
+      "criticite": "MINEURE",
+      "statut": "FERME",
+      "enCours": "Atraite",
+      "cloturee": "Rejetees"
+    },
+    "casDeTest": {
+      "resultat": "HorsPerimetre",
+      "scenarioDeTests": {
+        "scenarion" : "Test ajout Release + Ticket"
+      }
+    }
+  }
+}

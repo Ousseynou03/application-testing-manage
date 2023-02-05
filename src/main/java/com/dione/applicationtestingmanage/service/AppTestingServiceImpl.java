@@ -60,7 +60,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
                                 ticket.setRefTicket(UUID.randomUUID().toString());
                                 ticket.setTitre(titreTicket);
                                 ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
-                                //ticket.setTesteur(ticket.getTesteur());
                                 ticket.setRelease(release);
                                 ticket.setAnomalie(anomalie);
                                 ticket.setCasDeTest(cas);
@@ -168,8 +167,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
     //Initialisation des données de Cas de test
     @Override
     public void initCasDeTest() {
-        //ticketRepository.findAll().forEach(ticket -> {
-        //testeurRepository.findAll().forEach(teste -> {
+
         CasDeTest  casDeTest = new CasDeTest();
         casDeTest.setRefCasTest(UUID.randomUUID().toString());
         double randomNumber5 = Math.random();
@@ -187,8 +185,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
         }
         casDeTest.setResultat(resultat);
         casDeTestRepository.save(casDeTest);
-        // });
-        // });
 
 
     }

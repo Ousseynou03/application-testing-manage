@@ -19,7 +19,7 @@ public class CasDeTest {
     @Column(length = 15)
     private Resultat resultat;
 
-   @OneToMany
+    @OneToMany
     @JoinColumn(name = "ref_Scenario_id")
     private Collection<ScenarioDeTest> scenarioDeTests;
 
@@ -27,6 +27,5 @@ public class CasDeTest {
     @JoinColumn(name = "ref_Ticket_id")
     private Collection<Ticket> tickets;
 
-    @ManyToMany(mappedBy = "casDeTests")
-    private Collection<Testeur> testeur;
+
 }

@@ -1,7 +1,6 @@
 package com.dione.applicationtestingmanage.enums;
 
-public enum Nom {
-    Andres,
-    Richard,
-
+public enum Testeur {
+    ANDRES,
+    RICHARD
 }

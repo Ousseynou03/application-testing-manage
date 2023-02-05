@@ -17,15 +17,14 @@ import java.util.UUID;
 @Transactional
 public class ApplicationTestingManageController {
     private final ReleaseRepository releaseRepository;
-    private final TesteurRepository testeurRepository;
+
     private final AnomalieRepository anomalieRepository;
     private final TicketRepository ticketRepository;
     private final CasDeTestRepository casDeTestRepository;
     private final ScenarioDeTestRepository scenarioDeTestRepository;
 
-    public ApplicationTestingManageController(ReleaseRepository releaseRepository, TesteurRepository testeurRepository, AnomalieRepository anomalieRepository, TicketRepository ticketRepository, CasDeTestRepository casDeTestRepository, ScenarioDeTestRepository scenarioDeTestRepository) {
+    public ApplicationTestingManageController(ReleaseRepository releaseRepository, AnomalieRepository anomalieRepository, TicketRepository ticketRepository, CasDeTestRepository casDeTestRepository, ScenarioDeTestRepository scenarioDeTestRepository) {
         this.releaseRepository = releaseRepository;
-        this.testeurRepository = testeurRepository;
         this.anomalieRepository = anomalieRepository;
         this.ticketRepository = ticketRepository;
         this.casDeTestRepository = casDeTestRepository;
@@ -56,12 +55,6 @@ public class ApplicationTestingManageController {
         return scenarioDeTestRepository.findAll();
     }
 
-    //Méthodes de récupération de tous les testeurs
-    @GetMapping("/allTesteurs")
-    public List<Testeur> findAllTesteur(){
-        return testeurRepository.findAll();
-    }
-
     //Méthodes de récupérateur de tous les tickets
     @GetMapping("/allTickets")
     public List<Ticket> findAllTicket(){
@@ -79,9 +72,4 @@ public class ApplicationTestingManageController {
         return releaseRepository.save(release);
     }
 
-    //Méthodes d'ajout d'un testeur
-    @PostMapping
-    public Testeur addTesteur(@RequestBody Testeur testeur){
-        return testeurRepository.save(testeur);
-    }
 }

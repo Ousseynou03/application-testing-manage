@@ -34,18 +34,4 @@ public class Release {
             fetch = FetchType.EAGER */)
     private Collection<Ticket> tickets;
 
-
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(
-            name = "release_testeurs",
-            joinColumns = @JoinColumn(name = "refRelease"),
-            inverseJoinColumns = @JoinColumn(name = "idTesteur")
-    )
-    private Collection<Testeur> testeurs;
-
 }

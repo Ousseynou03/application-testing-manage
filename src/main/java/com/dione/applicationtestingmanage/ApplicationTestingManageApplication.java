@@ -31,7 +31,6 @@ public class ApplicationTestingManageApplication implements CommandLineRunner {
 		//Exposition des id
 		restConfiguration.exposeIdsFor(Release.class);
 		restConfiguration.exposeIdsFor(Ticket.class);
-		restConfiguration.exposeIdsFor(Testeur.class);
 		restConfiguration.exposeIdsFor(Anomalie.class);
 		restConfiguration.exposeIdsFor(CasDeTest.class);
 		restConfiguration.exposeIdsFor(ScenarioDeTest.class);
@@ -41,7 +40,6 @@ public class ApplicationTestingManageApplication implements CommandLineRunner {
 		appTestingService.initScenarioDeTest();
 		appTestingService.initRelease();
 		appTestingService.initTicket();
-		appTestingService.initTesteur();
 
 	}
 }

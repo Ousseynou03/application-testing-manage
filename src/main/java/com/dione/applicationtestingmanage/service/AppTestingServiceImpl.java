@@ -17,15 +17,13 @@ public class AppTestingServiceImpl implements IAppTestingService{
 
     private final ReleaseRepository releaseRepository;
     private final TicketRepository ticketRepository;
-    private final TesteurRepository testeurRepository;
     private final ScenarioDeTestRepository scenarioDeTestRepository;
     private final CasDeTestRepository casDeTestRepository;
     private final AnomalieRepository anomalieRepository;
 
-    public AppTestingServiceImpl(ReleaseRepository releaseRepository, TicketRepository ticketRepository, TesteurRepository testeurRepository, ScenarioDeTestRepository scenarioDeTestRepository, CasDeTestRepository casDeTestRepository, AnomalieRepository anomalieRepository) {
+    public AppTestingServiceImpl(ReleaseRepository releaseRepository, TicketRepository ticketRepository, ScenarioDeTestRepository scenarioDeTestRepository, CasDeTestRepository casDeTestRepository, AnomalieRepository anomalieRepository) {
         this.releaseRepository = releaseRepository;
         this.ticketRepository = ticketRepository;
-        this.testeurRepository = testeurRepository;
         this.scenarioDeTestRepository = scenarioDeTestRepository;
         this.casDeTestRepository = casDeTestRepository;
         this.anomalieRepository = anomalieRepository;
@@ -34,7 +32,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
     //Initialisation des données de releases
     @Override
     public void initRelease() {
-        for (int i=0; i<10;i++){
+        for (int i=0; i<3;i++){
             Release release = new Release();
             release.setRefRelease(UUID.randomUUID().toString());
             release.setDateLivraison(new Date());
@@ -49,17 +47,26 @@ public class AppTestingServiceImpl implements IAppTestingService{
     @Override
     public void initTicket() {
         releaseRepository.findAll().forEach(release -> {
-            //testeurRepository.findAll().forEach(testeur -> {
-            Stream.of("Déclaration des salaires","Controle de validite","Affilié ajouté sur un mois M").forEach(titreTicket -> {
-                Ticket ticket = new Ticket();
-                ticket.setRefTicket(UUID.randomUUID().toString());
-                ticket.setTitre(titreTicket);
-                ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
-                ticket.setTesteur(ticket.getTesteur());
-                ticketRepository.save(ticket);
+            casDeTestRepository.findAll().forEach(cas-> {
+                anomalieRepository.findAll().forEach(anomalie -> {
+
+                    Stream.of("Déclaration des salaires","Controle de validite","Affilié ajouté sur un mois M").forEach(titreTicket -> {
+                        Ticket ticket = new Ticket();
+                        ticket.setRefTicket(UUID.randomUUID().toString());
+                        ticket.setTitre(titreTicket);
+                        ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
+                        ticket.setTesteur(Math.random() > 0.5 ? Testeur.ANDRES : Testeur.RICHARD);
+                        ticket.setRelease(release);
+                        ticket.setAnomalie(anomalie);
+                        ticket.setCasDeTest(cas);
+                        ticketRepository.save(ticket);
             });
-        });
-        // });
+
+                                });
+
+            });
+       });
+
 
     }
 
@@ -146,21 +153,24 @@ public class AppTestingServiceImpl implements IAppTestingService{
 
     }
 
+/*
     //Initialisation des données de Testeur
     @Override
     public void initTesteur() {
         releaseRepository.findAll().forEach(release -> {
-
-                Testeur testeur = new Testeur();
-                testeur.setIdTesteur(UUID.randomUUID().toString());
-                testeur.setNom(Math.random() > 0.5 ? Nom.Richard : Nom.Andres);
-                testeur.setReleases(testeur.getReleases());
-                testeur.setCasDeTests(testeur.getCasDeTests());
-                testeurRepository.save(testeur);
+                Stream.of("Andres","Richard").forEach(nomTesteur-> {
+                    Testeur testeur = new Testeur();
+                    testeur.setNom(nomTesteur);
+                    //testeur.set
+                    testeur.setCasDeTests(testeur.getCasDeTests());
+                    testeurRepository.save(testeur);
+                });
             });
 
 
+
     }
+*/
 
     //Initialisation des données de Cas de test
     @Override
@@ -185,7 +195,6 @@ public class AppTestingServiceImpl implements IAppTestingService{
         }
 
         casDeTest.setResultat(resultat);
-        casDeTest.setTesteur(casDeTest.getTesteur());
         casDeTestRepository.save(casDeTest);
         // });
         // });

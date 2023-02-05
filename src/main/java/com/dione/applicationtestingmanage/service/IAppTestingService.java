@@ -6,6 +6,5 @@ public interface IAppTestingService {
     public void initTicket();
     public void initAnomalie();
     public void initScenarioDeTest();
-    public void initTesteur();
     public void initCasDeTest();
 }

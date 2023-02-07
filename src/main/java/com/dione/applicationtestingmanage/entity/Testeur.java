@@ -14,6 +14,7 @@ public class Testeur {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTesteur;
     private String nom;
+    private String prenom;
 
     @OneToMany(mappedBy = "testeur")
     //@JoinColumn(name = "id_Ticket")

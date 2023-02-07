@@ -59,7 +59,20 @@ public class AppTestingServiceImpl implements IAppTestingService{
                                 Ticket ticket = new Ticket();
                                 ticket.setRefTicket(UUID.randomUUID().toString());
                                 ticket.setTitre(titreTicket);
-                                ticket.setType(Math.random() > 0.5 ? Types.ANOMALIE : Types.EVOLUTION);
+                            double randomNumber6 = Math.random();
+                            Types types;
+                            if (randomNumber6 < 0.2) {
+                                types = Types.ANOMALIE;
+                            } else if (randomNumber6 < 0.4) {
+                                types = Types.RECIT;
+                            } else if (randomNumber6 < 0.6) {
+                                types = Types.INCIDENT;
+                            } else if (randomNumber6 < 0.8) {
+                                types = Types.EVOLUTION;
+                            } else {
+                                types = Types.HORS_RECIT;
+                            }
+                                ticket.setType(types);
                                 ticket.setRelease(release);
                                 ticket.setAnomalie(anomalie);
                                 ticket.setCasDeTest(cas);
@@ -93,7 +106,7 @@ public class AppTestingServiceImpl implements IAppTestingService{
             criticite = Criticite.MINEURE;
         }
         anomalie.setCriticite(criticite);
-        anomalie.setRefAnomalie(UUID.randomUUID().toString());
+        anomalie.setPriorite(Math.random() > 0.5 ? Priorite.EN_URGENCE : Priorite.STANDARD);
         double randomNumber2 = Math.random();
         Statut statut;
         if (randomNumber2 < 0.33){

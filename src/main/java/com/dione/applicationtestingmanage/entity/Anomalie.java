@@ -1,10 +1,7 @@
 package com.dione.applicationtestingmanage.entity;
 
 
-import com.dione.applicationtestingmanage.enums.Cloturee;
-import com.dione.applicationtestingmanage.enums.Criticite;
-import com.dione.applicationtestingmanage.enums.EnCours;
-import com.dione.applicationtestingmanage.enums.Statut;
+import com.dione.applicationtestingmanage.enums.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +19,9 @@ public class Anomalie {
     @Enumerated(EnumType.STRING)
     @Column(length = 30)
     private Criticite criticite;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 30)
+    private Priorite priorite;
     @Enumerated(EnumType.STRING)
     @Column(length = 30)
     private Statut statut;

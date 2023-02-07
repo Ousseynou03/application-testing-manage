@@ -2,5 +2,8 @@ package com.dione.applicationtestingmanage.enums;
 
 public enum Types {
     ANOMALIE,
-    EVOLUTION
+    EVOLUTION,
+    INCIDENT,
+    RECIT,
+    HORS_RECIT
 }
